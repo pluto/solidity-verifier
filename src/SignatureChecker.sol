@@ -3,28 +3,41 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-// todo: Do we need to have some stateful capabilities?
+/// @title SignatureChecker
+/// @notice A contract that verifies signatures
 contract SignatureChecker is Ownable {
-    // Mapping of notary addresses to their validity
+    /// @notice Mapping of notary addresses to their validity
     mapping(address => bool) public isNotary;
 
-    // error for invalid signatures
+    /// @notice Error for invalid signatures
     error InvalidSignature();
+    /// @notice Error for invalid notary addresses
     error InvalidNotary();
 
-    // constructor configures the notary address
+    /// @notice Constructor configures the notary address
+    /// @param _notaryAddress The address of the notary to add
     constructor(address _notaryAddress) Ownable(msg.sender) {
         isNotary[_notaryAddress] = true;
     }
 
+    /// @notice Adds a notary
+    /// @param _notaryAddress The address of the notary to add
     function addNotary(address _notaryAddress) external onlyOwner {
         isNotary[_notaryAddress] = true;
     }
 
+    /// @notice Removes a notary
+    /// @param _notaryAddress The address of the notary to remove
     function removeNotary(address _notaryAddress) external onlyOwner {
         isNotary[_notaryAddress] = false;
     }
 
+    /// @notice Verifies a signature
+    /// @param _hash The hash of the data that was signed
+    /// @param v The recovery id
+    /// @param r The R value of the signature
+    /// @param s The S value of the signature
+    /// @param signer The address that signed the data
     function verifySignature(bytes32 _hash, uint8 v, bytes32 r, bytes32 s, address signer)
         external
         view
