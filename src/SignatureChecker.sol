@@ -9,10 +9,15 @@ contract SignatureChecker is Ownable {
     /// @notice Mapping of notary addresses to their validity
     mapping(address => bool) public isNotary;
 
+    uint256 public constant BN254_MODULUS = 21888242871839275222246405745257275088548364400416034343698204186575808495617;
+
     /// @notice Error for invalid signatures
     error InvalidSignature();
     /// @notice Error for invalid notary addresses
     error InvalidNotary();
+
+    /// @notice Error for invalid signature length
+    error InvalidSignatureLength();
 
     /// @notice Constructor configures the notary address
     /// @param _notaryAddress The address of the notary to add
@@ -38,7 +43,7 @@ contract SignatureChecker is Ownable {
     /// @param r The R value of the signature
     /// @param s The S value of the signature
     /// @param signer The address that signed the data
-    function verifySignature(bytes32 _hash, uint8 v, bytes32 r, bytes32 s, address signer)
+    function verifyNotarySignature(bytes32 _hash, uint8 v, bytes32 r, bytes32 s, address signer)
         external
         view
         returns (bool)
