@@ -18,7 +18,9 @@ contract SignatureCheckerTest is Test {
         bytes32 r = bytes32(0x86c6ab86ac26bfdfd245ab65a05e90cd18afe9f810acb42532adf7570cd0ed77);
         bytes32 s = bytes32(0x17370b1c7a7d7d96155e6144a9bfc9265f81c354b1cb4af7cebe52e601dabfef);
         uint8 v = 27;
-        assertEq(signatureChecker.verifyNotarySignature(digest, v, r, s, signer), true);
+
+
+        assertEq(signatureChecker.verifyNotarySignature(digest, v, r, s, signer, manifest, value), true);
 
     }
 }
