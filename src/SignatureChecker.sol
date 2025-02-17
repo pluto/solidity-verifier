@@ -12,7 +12,8 @@ contract SignatureChecker is Ownable {
     /// valid digests for a given address
     mapping(address => bytes32) public digests;
 
-    uint256 public constant BN254_MODULUS = 21888242871839275222246405745257275088548364400416034343698204186575808495617;
+    uint256 public constant BN254_MODULUS =
+        21888242871839275222246405745257275088548364400416034343698204186575808495617;
 
     /// @notice Error for invalid signatures
     error InvalidSignature();
@@ -55,10 +56,15 @@ contract SignatureChecker is Ownable {
     /// @param signer The address that signed the data
     /// @param manifest The manifest of the data
     /// @param value The value of the data
-    function verifyNotarySignature(bytes32 digest, uint8 v, bytes32 r, bytes32 s, address signer, bytes32 manifest, bytes32 value)
-        external
-        returns (bool)
-    {
+    function verifyNotarySignature(
+        bytes32 digest,
+        uint8 v,
+        bytes32 r,
+        bytes32 s,
+        address signer,
+        bytes32 manifest,
+        bytes32 value
+    ) external returns (bool) {
         // check if the signer is a notary
         if (!isNotary[signer]) {
             revert InvalidNotary();
