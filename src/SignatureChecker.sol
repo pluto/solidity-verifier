@@ -12,9 +12,6 @@ contract SignatureChecker is Ownable {
     /// valid digests for a given address
     mapping(address => bytes32) public digests;
 
-    uint256 public constant BN254_MODULUS =
-        21888242871839275222246405745257275088548364400416034343698204186575808495617;
-
     /// @notice Error for invalid signatures
     error InvalidSignature();
     /// @notice Error for invalid notary addresses
@@ -23,6 +20,8 @@ contract SignatureChecker is Ownable {
     error InvalidDigest();
     /// @notice Error for invalid signature length
     error InvalidSignatureLength();
+    /// @notice Error for duplicate proof, meaning the proofs is already associated with another address
+    error DuplicateProof();
 
     /// @notice Constructor configures the notary address
     /// @param _notaryAddress The address of the notary to add
@@ -81,6 +80,10 @@ contract SignatureChecker is Ownable {
         if (recoveredSigner != signer) {
             revert InvalidSignature();
         }
+        if (digests[msg.sender] == digest) {
+            revert DuplicateProof();
+        }
+
         digests[msg.sender] = digest;
         return true;
     }
