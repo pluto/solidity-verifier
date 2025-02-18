@@ -1,0 +1,9 @@
+{ 
+    "digest": "0x0ad25b24a05589ed9f2332ac85f5690c8400019f32858c2f6bf24877362d41db", 
+    "signature": "0x304502210086c6ab86ac26bfdfd245ab65a05e90cd18afe9f810acb42532adf7570cd0ed77022017370b1c7a7d7d96155e6144a9bfc9265f81c354b1cb4af7cebe52e601dabfef", 
+    "signature_r": "0x86c6ab86ac26bfdfd245ab65a05e90cd18afe9f810acb42532adf7570cd0ed77",
+    "signature_s": "0x17370b1c7a7d7d96155e6144a9bfc9265f81c354b1cb4af7cebe52e601dabfef",
+    "signature_v": 27, 
+    "signer": "0xfdf07a5dcfa7b74f4c28dab23ead8b1c43be801f" 
+}
+

@@ -8,21 +8,20 @@ contract SignatureCheckerTest is Test {
     SignatureChecker public signatureChecker;
 
     function setUp() public {
-        signatureChecker = new SignatureChecker();
+        signatureChecker = new SignatureChecker(0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F);
     }
 
-    function test_isValidSignatureNow() public view {
-        // Replace with our notary proof hash
-        bytes32 hash = keccak256("test");
+    function test_isValidSignatureNow() public {
+        // TEST vector from web-prover @ githash 2dc768e818d6f9fef575a88a2ceb80c0ed11974f
+        address signer = 0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F;
+        bytes32 digest = bytes32(0xe45537be7b5cd288c9c46b7e027b4f5a66202146012f792c1b1cabb65828994b);
+        bytes32 r = bytes32(0x36e820b3524e9ffffe0b4ee49e4131cc362fd161821c1dfc8757dc6186f31c96);
+        bytes32 s = bytes32(0x416e537065673e3028eca37cf3cbe805a3d2fafbc47235fee5e89df5f0509a9c);
+        uint8 v = 27;
 
-        // Replace with our notary signature
-        // 9039BD2DED8FD5E09B62A04A3D25D2D13F0F45F40C1B4CA6C3AECE4A71F92C1416D62561A8939ED49C97D9621C47988CF74B5B5074F89F2B2C6B9B18A6EEB1B2
-        // 9039BD2DED8FD5E09B62A04A3D25D2D13F0F45F40C1B4CA6C3AECE4A71F92C1416D62561A8939ED49C97D9621C47988CF74B5B5074F89F2B2C6B9B18A6EEB1B2
-        // There are interestingly 129 characters in this signature, the ercrecover opcode expects 65 where 32 are R, 32 are S, and 1 is V
-        bytes memory signature =
-            abi.encodePacked(bytes32(0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef));
+        bytes32 value = 0x8452c9b9140222b08593a26daa782707297be9f7b3e8281d7b4974769f19afd0;
+        bytes32 manifest = 0x7df909980a1642d0370a4a510422201ce525da6b319a7b9e9656771fa7336d5a;
 
-        // verify signature
-        assertEq(signatureChecker.isValidSignatureNow(hash, signature), true);
+        assertEq(signatureChecker.verifyNotarySignature(digest, v, r, s, signer, manifest, value), true);
     }
 }

@@ -12,7 +12,7 @@ contract SignatureCheckerScript is Script {
     function run() public {
         vm.startBroadcast();
 
-        signatureChecker = new SignatureChecker();
+        signatureChecker = new SignatureChecker(0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F);
 
         vm.stopBroadcast();
     }
