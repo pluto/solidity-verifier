@@ -11,16 +11,17 @@ contract SignatureCheckerTest is Test {
         signatureChecker = new SignatureChecker(0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F);
     }
 
-    function test_isValidSignatureNow() public view {
-        // TEST vector from NOTARY
+    function test_isValidSignatureNow() public {
+        // TEST vector from web-prover @ githash 2dc768e818d6f9fef575a88a2ceb80c0ed11974f
         address signer = 0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F;
-        bytes32 digest = bytes32(0x0ad25b24a05589ed9f2332ac85f5690c8400019f32858c2f6bf24877362d41db);
-        bytes32 r = bytes32(0x86c6ab86ac26bfdfd245ab65a05e90cd18afe9f810acb42532adf7570cd0ed77);
-        bytes32 s = bytes32(0x17370b1c7a7d7d96155e6144a9bfc9265f81c354b1cb4af7cebe52e601dabfef);
+        bytes32 digest = bytes32(0xe45537be7b5cd288c9c46b7e027b4f5a66202146012f792c1b1cabb65828994b);
+        bytes32 r = bytes32(0x36e820b3524e9ffffe0b4ee49e4131cc362fd161821c1dfc8757dc6186f31c96);
+        bytes32 s = bytes32(0x416e537065673e3028eca37cf3cbe805a3d2fafbc47235fee5e89df5f0509a9c);
         uint8 v = 27;
 
-        // TODO(WJ 2025-02-17): get manifest and value from the digest
+        bytes32 value = 0x8452c9b9140222b08593a26daa782707297be9f7b3e8281d7b4974769f19afd0;
+        bytes32 manifest = 0x7df909980a1642d0370a4a510422201ce525da6b319a7b9e9656771fa7336d5a;
 
-        // assertEq(signatureChecker.verifyNotarySignature(digest, v, r, s, signer, manifest, value), true);
+        assertEq(signatureChecker.verifyNotarySignature(digest, v, r, s, signer, manifest, value), true);
     }
 }
