@@ -24,27 +24,27 @@ contract SignatureChecker is Ownable {
     error DuplicateProof();
 
     /// @notice Constructor configures the notary address
-    /// @param _notaryAddress The address of the notary to add
-    constructor(address _notaryAddress) Ownable(msg.sender) {
-        isNotary[_notaryAddress] = true;
+    /// @param notaryAddress The address of the notary to add
+    constructor(address notaryAddress) Ownable(msg.sender) {
+        isNotary[notaryAddress] = true;
     }
 
     /// @notice Adds a notary
-    /// @param _notaryAddress The address of the notary to add
-    function addNotary(address _notaryAddress) external onlyOwner {
-        isNotary[_notaryAddress] = true;
+    /// @param notaryAddress The address of the notary to add
+    function addNotary(address notaryAddress) external onlyOwner {
+        isNotary[notaryAddress] = true;
     }
 
     /// @notice Removes a notary
-    /// @param _notaryAddress The address of the notary to remove
-    function removeNotary(address _notaryAddress) external onlyOwner {
-        isNotary[_notaryAddress] = false;
+    /// @param notaryAddress The address of the notary to remove
+    function removeNotary(address notaryAddress) external onlyOwner {
+        isNotary[notaryAddress] = false;
     }
 
     // Check to see that the digest is a merkle root of a keccak256 hash of a leafs = (keccak(value), keccak(manifest))
-    function verify_digest(bytes32 _digest, bytes32 _manifest, bytes32 _value) internal pure returns (bool) {
-        bytes32 root = keccak256(abi.encodePacked(_value, _manifest));
-        return _digest == root;
+    function verify_digest(bytes32 digest, bytes32 manifest, bytes32 value) internal pure returns (bool) {
+        bytes32 root = keccak256(abi.encodePacked(value, manifest));
+        return digest == root;
     }
 
     /// @notice Verifies a signature
