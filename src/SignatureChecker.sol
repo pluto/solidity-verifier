@@ -82,7 +82,7 @@ contract SignatureChecker is Ownable {
         }
 
         // TODO(WJ 2025-02-20): Should check for any sender.
-        if (digests[digest] != msg.sender) {
+        if (digests[digest] == msg.sender) {
             revert DuplicateProof();
         }
 
