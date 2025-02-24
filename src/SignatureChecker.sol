@@ -10,7 +10,7 @@ contract SignatureChecker is Ownable {
     mapping(address => bool) public isNotary;
 
     /// valid digests for a given address
-    mapping(address => bytes32) public digests;
+    mapping(bytes32 => address) public digests;
 
     /// @notice Error for invalid signatures
     error InvalidSignature();
@@ -80,11 +80,13 @@ contract SignatureChecker is Ownable {
         if (recoveredSigner != signer) {
             revert InvalidSignature();
         }
-        if (digests[msg.sender] == digest) {
+
+        // TODO(WJ 2025-02-20): Should check for any sender.
+        if (digests[digest] == msg.sender) {
             revert DuplicateProof();
         }
 
-        digests[msg.sender] = digest;
+        digests[digest] = msg.sender;
         return true;
     }
 }

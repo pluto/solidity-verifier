@@ -11,7 +11,7 @@ contract SignatureCheckerTest is Test {
         signatureChecker = new SignatureChecker(0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F);
     }
 
-    function test_isValidSignatureNow() public {
+    function test_isValidSignature() public {
         // TEST vector from web-prover @ githash 2dc768e818d6f9fef575a88a2ceb80c0ed11974f
         address signer = 0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F;
         bytes32 digest = bytes32(0xe45537be7b5cd288c9c46b7e027b4f5a66202146012f792c1b1cabb65828994b);
