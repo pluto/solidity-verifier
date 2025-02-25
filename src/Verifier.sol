@@ -3,9 +3,9 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/// @title SignatureChecker
+/// @title Verifier
 /// @notice A contract that verifies signatures
-contract SignatureChecker is Ownable {
+contract Verifier is Ownable {
     /// @notice Mapping of notary addresses to their validity
     mapping(address => bool) public isNotary;
 

@@ -2,13 +2,13 @@
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
-import {SignatureChecker} from "../src/SignatureChecker.sol";
+import {Verifier} from "../src/Verifier.sol";
 
-contract SignatureCheckerTest is Test {
-    SignatureChecker public signatureChecker;
+contract VerifierTest is Test {
+    Verifier public verifier;
 
     function setUp() public {
-        signatureChecker = new SignatureChecker(0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F);
+        verifier = new Verifier(0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F);
     }
 
     function test_isValidSignature() public {
@@ -22,6 +22,6 @@ contract SignatureCheckerTest is Test {
         bytes32 value = 0x8452c9b9140222b08593a26daa782707297be9f7b3e8281d7b4974769f19afd0;
         bytes32 manifest = 0x7df909980a1642d0370a4a510422201ce525da6b319a7b9e9656771fa7336d5a;
 
-        assertEq(signatureChecker.verifyNotarySignature(digest, v, r, s, signer, manifest, value), true);
+        assertEq(verifier.verifyNotarySignature(digest, v, r, s, signer, manifest, value), true);
     }
 }
