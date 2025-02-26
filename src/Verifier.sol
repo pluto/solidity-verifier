@@ -77,7 +77,7 @@ contract Verifier is Ownable {
         // v is 27 or 28 based on the y-value being even or odd
         // verify the signature
         address recoveredSigner = ecrecover(digest, v, r, s);
-        if (recoveredSigner != signer) {
+        if (recoveredSigner == address(0) || recoveredSigner != signer) {
             revert InvalidSignature();
         }
 
