@@ -2,7 +2,7 @@
 
 This is a simple contract that verifies signatures from a given notary.
 
-The contract is deployed on Base Sepolia at [`0xb4C3FC8aE7f7a9DCc73108cd8F35f82110008189`](https://sepolia.basescan.org/address/0xb4c3fc8ae7f7a9dcc73108cd8f35f82110008189)
+The contract is deployed on Base Sepolia at [`0xcdd5Eb84a92805a2C0a819E8A36aa63F9eF56F80`](https://sepolia.basescan.org/address/0xcdd5Eb84a92805a2C0a819E8A36aa63F9eF56F80)
 
 ### Deployment & Verification
 
