@@ -12,7 +12,7 @@ contract VerifierScript is Script {
     function run() public {
         vm.startBroadcast();
 
-        verifier = new PlutoAttestationVerifier(0xfdf07A5dCfa7b74f4c28DAb23eaD8B1c43Be801F);
+        verifier = new PlutoAttestationVerifier(0x209Af77DfDaba352890b0Bc9B86A25bE67eF436A);
 
         vm.stopBroadcast();
     }
