@@ -45,7 +45,7 @@ If the deployment script succeeds but verification fails for some reason, you ca
 2.  **Run the verify command:**
 
     ```bash
-    forge verify-contract <CONTRACT_ADDRESS> src/Verifier.sol:Verifier \
+    forge verify-contract <CONTRACT_ADDRESS> src/Verifier.sol:PlutoAttestationVerifier \
       --chain base-sepolia \
       --verifier etherscan \
       --etherscan-api-key $ETHERSCAN_API_KEY \
