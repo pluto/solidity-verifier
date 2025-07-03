@@ -41,10 +41,10 @@ contract PlutoAttestationExample is Test {
         // Create the proof data array
         string[] memory keys = new string[](2);
         string[] memory values = new string[](2);
-        keys[0] = "a";
-        keys[1] = "c";
-        values[0] = "10";
-        values[1] = "\"d\"";
+        keys[0] = "c";
+        keys[1] = "a";
+        values[0] = "\"d\"";
+        values[1] = "10";
 
         PlutoAttestationVerifier.ProofData[] memory proofData = verifier.createProofDataArray(keys, values);
 

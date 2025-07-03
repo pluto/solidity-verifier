@@ -137,28 +137,11 @@ contract PlutoAttestationVerifier {
         string memory sessionId,
         ProofData[] memory data
     ) public pure returns (bytes32) {
-        // Sort the data array by key (simple bubble sort for demonstration)
-        ProofData[] memory sortedData = new ProofData[](data.length);
-        for (uint256 i = 0; i < data.length; i++) {
-            sortedData[i] = data[i];
-        }
-
-        // Bubble sort by key
-        for (uint256 i = 0; i < sortedData.length; i++) {
-            for (uint256 j = 0; j < sortedData.length - 1 - i; j++) {
-                if (keccak256(bytes(sortedData[j].key)) > keccak256(bytes(sortedData[j + 1].key))) {
-                    ProofData memory temp = sortedData[j];
-                    sortedData[j] = sortedData[j + 1];
-                    sortedData[j + 1] = temp;
-                }
-            }
-        }
-
         // Build the hash incrementally
         bytes memory hashData = abi.encodePacked(version, issuedAt, nonce, sessionId);
 
-        for (uint256 i = 0; i < sortedData.length; i++) {
-            hashData = abi.encodePacked(hashData, sortedData[i].key, sortedData[i].value);
+        for (uint256 i = 0; i < data.length; i++) {
+            hashData = abi.encodePacked(hashData, data[i].key, data[i].value);
         }
 
         return keccak256(hashData);
